@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>FaceHello AI | Face Recognition</title>
+
+  <meta
+    name="description"
+    content="FaceHello AI - Webcam face detection, face recognition, voice greetings and automatic photo gallery."
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-icon">◉</span>
+      <div>
+        <h1>FaceHello <span>AI</span></h1>
+        <p>Smart Face Recognition System</p>
+      </div>
+    </div>
+
+    <div class="system-status">
+      <span class="status-dot"></span>
+      <span id="cameraStatus">Camera is off</span>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <section class="hero">
+      <p class="eyebrow">AI POWERED EXPERIENCE</p>
+      <h2>Your Face. Your Identity. <span>Your Hello.</span></h2>
+      <p>
+        Detect faces, recognize registered people, greet them with voice,
+        and automatically capture memorable moments.
+      </p>
+    </section>
+
+    <section class="dashboard">
+      <!-- CAMERA SECTION -->
+      <div class="panel camera-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Live Camera</h2>
+            <p>Keep your face visible inside the frame.</p>
+          </div>
+          <span class="live-badge">
+            <span class="status-dot"></span>
+            LIVE
+          </span>
+        </div>
+
+        <div class="camera-frame">
+          <video
+            id="camera"
+            autoplay
+            muted
+            playsinline
+          ></video>
+
+          <div id="placeholder" class="camera-placeholder">
+            <div class="camera-symbol">◎</div>
+            <h3>Camera is waiting</h3>
+            <p>Click Start Camera to begin face detection.</p>
+          </div>
+
+          <!-- Face-detection overlay is created by script.js -->
+        </div>
+
+        <div class="camera-actions">
+          <button id="startCamera" class="primary-button" type="button">
+            Start Camera
+          </button>
+
+          <button id="stopCamera" class="secondary-button" type="button">
+            Stop Camera
+          </button>
+        </div>
+
+        <div class="privacy-note">
+          <span>🔒</span>
+          <p>
+            Camera access requires your permission. Registered face data and
+            captured photos are stored in this browser by the provided script.
+          </p>
+        </div>
+      </div>
+
+      <!-- RECOGNITION SECTION -->
+      <div class="panel recognition-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Face Recognition</h2>
+            <p>Recognition results appear here.</p>
+          </div>
+          <span class="ai-badge">AI</span>
+        </div>
+
+        <div class="person-display">
+          <div class="person-avatar">👤</div>
+          <p class="person-label">IDENTIFIED PERSON</p>
+          <h3 id="personName">No face recognized</h3>
+          <p id="recognitionStatus" aria-live="polite">
+            Start the camera to detect a face.
+          </p>
+        </div>
+
+        <div class="info-list">
+          <div class="info-row">
+            <span>Camera</span>
+            <strong id="cameraInfo">Inactive</strong>
+          </div>
+          <div class="info-row">
+            <span>Recognition</span>
+            <strong>Face matching</strong>
+          </div>
+          <div class="info-row">
+            <span>Greeting</span>
+            <strong>Voice enabled</strong>
+          </div>
+        </div>
+
+        <div class="register-section">
+          <h3>Register a New Face</h3>
+          <p>
+            Start the camera, keep one face visible, enter a name,
+            and click Register Face.
+          </p>
+
+          <div class="face-controls">
+            <input
+              id="registerName"
+              type="text"
+              placeholder="Enter person's name"
+              autocomplete="name"
+              maxlength="60"
+            />
+
+            <button id="registerFace" class="primary-button" type="button">
+              Register Face
+            </button>
+          </div>
+
+          <p id="registrationStatus" aria-live="polite">
+            No new face registered yet.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPTURED PHOTOS GALLERY -->
+    <section class="panel gallery-section">
+      <div class="gallery-heading">
+        <div>
+          <p class="eyebrow">YOUR MOMENTS</p>
+          <h2>Captured Photos</h2>
+          <p>
+            Photos captured automatically when a registered face is recognized.
+          </p>
+        </div>
+
+        <button id="clearGallery" class="secondary-button" type="button">
+          Clear Gallery
+        </button>
+      </div>
+
+      <!-- Keep this ID unique: script.js uses it to render photos. -->
+      <div id="photoGallery" class="photo-gallery">
+        <p class="gallery-empty">Your captured photos will appear here.</p>
+      </div>
+    </section>
+
+    <section class="how-it-works">
+      <h2>How It Works</h2>
+
+      <div class="steps-grid">
+        <article class="step-card">
+          <span>01</span>
+          <h3>Start Camera</h3>
+          <p>Allow camera access and position your face in the frame.</p>
+        </article>
+
+        <article class="step-card">
+          <span>02</span>
+          <h3>Register Face</h3>
+          <p>Enter a name to save a face descriptor for matching.</p>
+        </article>
+
+        <article class="step-card">
+          <span>03</span>
+          <h3>Get Greeted</h3>
+          <p>The app can announce a recognized person's name.</p>
+        </article>
+
+        <article class="step-card">
+          <span>04</span>
+          <h3>Capture Moments</h3>
+          <p>View automatically captured photos in the gallery.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>FaceHello AI · Smart Face Recognition Experience</p>
+    <p>Use face data only with the person's knowledge and consent.</p>
+  </footer>
+
+  <!-- Load face-api.js before your own script.js. -->
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
